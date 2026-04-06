@@ -14,7 +14,7 @@ export default function NotFound() {
         </h1>
 
         <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-          Sorry, we couldn't find the product you're looking for. It may have been removed or doesn't exist.
+          Sorry, we couldn&apos;t find the product you&apos;re looking for. It may have been removed or doesn&apos;t exist.
         </p>
 
         <Link
