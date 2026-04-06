@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { toast } from '@/hooks/use-toast';
 
 interface FavoritesContextType {
   favorites: string[];
@@ -38,10 +39,19 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
     setFavorites((prev) =>
       prev.includes(productId) ? prev : [...prev, productId]
     );
+    toast({
+      title: "Added to favorites",
+      description: "Item saved to your favorites.",
+    });
   };
 
   const removeFromFavorites = (productId: string) => {
     setFavorites((prev) => prev.filter((id) => id !== productId));
+    toast({
+      title: "Removed from favorites",
+      description: "Item removed from your favorites.",
+      variant: "destructive",
+    });
   };
 
   const isFavorite = (productId: string) => {
@@ -50,6 +60,10 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
 
   const clearFavorites = () => {
     setFavorites([]);
+    toast({
+      title: "Favorites cleared",
+      description: "All items have been removed from your favorites.",
+    });
   };
 
   return (

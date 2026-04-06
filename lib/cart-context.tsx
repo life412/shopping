@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product } from './products';
+import { toast } from '@/hooks/use-toast';
 
 export interface CartItem {
   product: Product;
@@ -54,6 +55,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prevItems, { product, quantity }];
     });
+    
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+    });
   };
 
   const removeFromCart = (productId: string) => {
@@ -74,6 +80,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const clearCart = () => {
     setItems([]);
+    toast({
+      title: "Cart cleared",
+      description: "All items have been removed from your cart.",
+    });
   };
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
